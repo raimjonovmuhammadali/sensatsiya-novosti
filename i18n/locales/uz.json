@@ -1,0 +1,16 @@
+{
+  "hello": "Salom",
+    "search": "Saytda izlash",
+    "news": "Yangiliklar",
+    "read_more": "Batafsil o‘qish",
+    "home": "Bosh sahifa",
+    "politics": "Siyosat",
+    "world": "Jahon",
+    "business": "Biznes",
+    "technology": "Texnologiya",
+    "sports": "Sport",
+    "entertainment": "Ko‘ngilochar",
+    "health": "Salomatlik",
+    "opinion": "Fikr",
+    "weather": "Ob-havo"
+}

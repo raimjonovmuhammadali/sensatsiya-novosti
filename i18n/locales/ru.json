@@ -1,0 +1,16 @@
+{
+  "hello": "Привет",
+  "search": "Поиск по сайту",
+  "news": "Новости",
+  "read_more": "Читать далее",
+  "home": "Главная",
+  "politics": "Политика",
+  "world": "Мир",
+  "business": "Бизнес",
+  "technology": "Технологии",
+  "sports": "Спорт",
+  "entertainment": "Развлечения",
+  "health": "Здоровье",
+  "opinion": "Мнение",
+  "weather": "Погода"
+}
