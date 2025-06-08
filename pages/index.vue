@@ -14,7 +14,7 @@
                     <img
                       :src="featuredArticles[0].image"
                       :alt="featuredArticles[0].title"
-                      class="w-full h-72 object-cover"
+                      class="w-full h-78 object-cover"
                     />
                     <span v-if="featuredArticles[0].isBreaking" class="absolute top-4 left-4 bg-red-700 text-white px-3 py-1 rounded-md text-xs font-bold">
                       <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +45,7 @@
                     <img
                       :src="article.image"
                       :alt="article.title"
-                      class="w-36 h-28 object-cover"
+                      class="w-36 h-36 object-cover"
                     />
                     <div class="flex-1 p-5">
                       <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded-md text Xs font-medium mb-2 inline-block">
@@ -80,10 +80,10 @@
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                 </svg>
-                Video News
+                Video yangiliklar
               </h2>
               <button class="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
-                View All Videos →
+                Barchasi →
               </button>
             </div>
 
@@ -208,7 +208,7 @@
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
-                Trending Now
+                So'ngi yangiliklar
               </h3>
               <div class="space-y-4">
                 <div
@@ -414,7 +414,7 @@ const featuredArticles = [
     author: "Sarah Johnson",
     publishedAt: "2 hours ago",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1508514177221-188b645fd5af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+    image: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
     isBreaking: true,
     views: "125K",
   },
@@ -426,7 +426,7 @@ const featuredArticles = [
     author: "Dr. Michael Chen",
     publishedAt: "4 hours ago",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1516321318423-8fc5d0132173?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    image: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
     views: "89K",
   },
   {
@@ -437,7 +437,7 @@ const featuredArticles = [
     author: "Emma Rodriguez",
     publishedAt: "6 hours ago",
     readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc5388?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    image: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
     views: "67K",
   },
 ]
@@ -448,7 +448,7 @@ const videoNews = [
     title: "Live: President's Address on Economic Recovery",
     duration: "45:32",
     views: "2.1M",
-    thumbnail: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&h=200",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
     isLive: true,
   },
   {
@@ -456,7 +456,7 @@ const videoNews = [
     title: "Breaking: Major Earthquake Hits Pacific Region",
     duration: "12:45",
     views: "890K",
-    thumbnail: "https://images.unsplash.com/photo-1612872087720-48736c15b8b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&h=200",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
     isBreaking: true,
   },
   {
@@ -464,14 +464,14 @@ const videoNews = [
     title: "Tech Giants Announce New AI Partnership",
     duration: "8:23",
     views: "456K",
-    thumbnail: "https://images.unsplash.com/photo-1516321318423-8fc5d0132173?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&h=200",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
   },
   {
     id: 4,
     title: "Sports Highlights: Championship Finals",
     duration: "15:17",
     views: "723K",
-    thumbnail: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=350&h=200",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
   },
 ]
 
@@ -507,17 +507,17 @@ const photoGallery = [
   {
     title: "Climate Protests Around the World",
     images: 24,
-    thumbnail: "https://images.unsplash.com/photo-1562077774-2600ab25d0ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=150",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
   },
   {
     title: "Olympic Training Facilities",
     images: 18,
-    thumbnail: "https://images.unsplash.com/photo-1512941675423-6b7e6b3c66d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=150",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
   },
   {
     title: "Tech Conference Highlights",
     images: 32,
-    thumbnail: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=150",
+    thumbnail: "https://avatars.mds.yandex.net/i?id=9a0ea24bfaeed9e190e08c40c9c52596_l-5694541-images-thumbs&n=13",
   },
 ]
 </script>
