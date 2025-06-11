@@ -6,11 +6,11 @@
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center">
-          <div
+          <nuxt-link to="/"
             class="text-3xl font-extrabold text-blue-600 tracking-tight transition-transform duration-300 hover:scale-105"
           >
             Сенсация Новости
-          </div>
+          </nuxt-link>
         </div>
 
         <!-- Search Bar -->
@@ -20,7 +20,7 @@
           <input
             v-model="searchTerm"
             type="text"
-            :placeholder="$t('search')"
+            placeholder="Izlash"
             class="pl-10 pr-4 py-2.5 w-full border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all duration-300 group-hover:shadow-md"
             aria-label="Search news articles"
             @focus="searchFocused = true"
@@ -44,28 +44,10 @@
 
         <!-- Right Side -->
         <div class="flex items-center space-x-4">
-          <!-- Language Selector -->
-          <div class="relative">
-            <select
-              v-model="locale"
-              @change="changeLanguage"
-              class="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Select language"
-            >
-              <option
-                v-for="loc in locales"
-                :key="loc.code"
-                :value="loc.code"
-              >
-                {{ loc.name }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Mobile Menu Button -->
+          <!-- Hamburger Menu Button -->
           <button
             @click="toggleMenu"
-            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 focus:outline-none"
             aria-label="Toggle menu"
           >
             <svg
@@ -86,15 +68,15 @@
         </div>
       </div>
 
-      <!-- Navigation Menu -->
+      <!-- Navigation Menu (Desktop) -->
       <nav class="hidden md:block border-t border-gray-200">
         <div
           class="flex space-x-6 py-3 overflow-x-auto scrollbar-thin scrollbar-thumb-blue-600 scrollbar-track-gray-100"
         >
           <a
-            v-for="item in mainMenuItems"
-            :key="item.href"
-            :href="item.href"
+            v-for="item in categoiresData"
+            :key="item.text"
+            :href="item.text"
             :class="[
               'text-sm font-medium transition-all duration-300 whitespace-nowrap px-3 py-2 rounded-full',
               item.active
@@ -102,7 +84,7 @@
                 : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
             ]"
           >
-            {{ $t(item.name.toLowerCase()) }}
+            {{ item.title.toUpperCase() }}
           </a>
         </div>
       </nav>
@@ -123,7 +105,7 @@
               <input
                 v-model="searchTerm"
                 type="text"
-                :placeholder="$t('search')"
+                placeholder="Izlash"
                 class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all duration-300"
                 aria-label="Search news articles"
               />
@@ -143,9 +125,9 @@
               </svg>
             </div>
             <a
-              v-for="item in mainMenuItems"
-              :key="item.href"
-              :href="item.href"
+              v-for="item in categoiresData"
+              :key="item.text"
+              :href="item.text"
               :class="[
                 'block px-4 py-2.5 text-base font-medium rounded-lg transition-all duration-200',
                 item.active
@@ -153,7 +135,7 @@
                   : 'text-gray-800 hover:text-blue-600 hover:bg-blue-50',
               ]"
             >
-              {{ $t(item.name.toUpperCase()) }}
+              {{ item.title.toUpperCase() }}
             </a>
           </div>
         </div>
@@ -164,46 +146,21 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
 
-const { locale, locales, t, setLocale } = useI18n();
+const { categoiresData, fetchCategoires } = useCategoires()
+
+onMounted(() => {
+  fetchCategoires()
+})
 
 const isMenuOpen = ref(false);
 const searchTerm = ref('');
 const searchFocused = ref(false);
 
-const mainMenuItems = ref([
-  { name: 'home', href: '#', active: true },
-  { name: 'politics', href: '#' },
-  { name: 'world', href: '#' },
-  { name: 'business', href: '#' },
-  { name: 'technology', href: '#' },
-  { name: 'sports', href: '#' },
-  { name: 'entertainment', href: '#' },
-  { name: 'health', href: '#' },
-  { name: 'opinion', href: '#' },
-  { name: 'weather', href: '#' },
-]);
-
 // Toggle mobile menu
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
-
-// Handle language change
-const changeLanguage = () => {
-  setLocale(locale.value);
-};
-
-// Watch for locale changes and update immediately
-watch(locale, (newLocale) => {
-  setLocale(newLocale);
-  // Update menu items to reflect the new language
-  mainMenuItems.value = mainMenuItems.value.map(item => ({
-    ...item,
-    name: t(item.name),
-  }));
-});
 </script>
 
 <style scoped>

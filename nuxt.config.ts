@@ -6,16 +6,16 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  i18n: {
-    lazy: true,
-    langDir: "locales",
-    defaultLocale: "uz",
-    strategy: "prefix",
-    locales: [
-      { code: "uz", iso: "uz-UZ", name: "O'zbekcha", file: "uz.json" },
-      { code: "ru", iso: "ru-RU", name: "Русский", file: "ru.json" },
-      { code: "en", iso: "en-US", name: "English", file: "en.json" },
-    ],
-  },
+  // i18n: {
+  //   lazy: true,
+  //   langDir: "locales",
+  //   defaultLocale: "uz",
+  //   strategy: "prefix",
+  //   locales: [
+  //     { code: "uz", iso: "uz-UZ", name: "O'zbekcha", file: "uz.json" },
+  //     { code: "ru", iso: "ru-RU", name: "Русский", file: "ru.json" },
+  //     { code: "en", iso: "en-US", name: "English", file: "en.json" },
+  //   ],
+  // },
   devtools: { enabled: true },
 });
