@@ -57,7 +57,7 @@ const logout = () => {
         <h1 class="text-2xl font-bold text-teal-400">Сенсация Новости</h1>
       </div>
       <div class="flex items-center space-x-4">
-        <div class="flex flex-col-reverse">
+        <div class="md:flex flex-col-reverse hidden">
           <span class="text-sm text-gray-400 flex flex-col gap-3">{{
             new Date().toLocaleDateString()
           }}</span>
@@ -117,16 +117,6 @@ const logout = () => {
                 icon: 'M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM3 11a1 1 0 100 2h12a1 1 0 100-2H3z',
               },
               {
-                href: '/panel/analytics',
-                label: 'Analytics',
-                icon: 'M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z',
-              },
-              {
-                href: '/users',
-                label: 'Users',
-                icon: 'M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z',
-              },
-              {
                 href: '/panel/settings',
                 label: 'Sozlamalar',
                 icon: 'M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.792.903 1.24.903 2.104a1.532 1.532 0 01-.948 2.286c-1.56.38-1.56 2.6 0 2.98a1.532 1.532 0 01.948 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.948c.38 1.56 2.6 1.56 2.98 0a1.532 1.532 0 012.286-.948c1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01.948-2.287c1.56-.38 1.56-2.6 0-2.98a1.532 1.532 0 01-.948-2.286c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.948zM10 13a3 3 0 100-6 3 3 0 000 6z',
@@ -151,7 +141,7 @@ const logout = () => {
       </aside>
 
       <!-- Main Content -->
-      <main class="w-full md:w-[85%] p-4 md:p-8">
+      <main class="w-full md:w-[85%]">
         <slot />
       </main>
     </div>

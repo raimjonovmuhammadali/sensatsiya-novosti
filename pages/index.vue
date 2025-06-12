@@ -3,7 +3,7 @@
     <div class="grid lg:grid-cols-4 gap-10">
       <div class="lg:col-span-3">
         <!-- Hero Section -->
-        <section class="mb-10" v-if="allNews?.length">
+        <section class="mb-10" v-if="allNews?.length && allNews[0].image">
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Main Featured Article -->
             <div class="md:col-span-1">
@@ -68,7 +68,6 @@
         <SharedBannerAd />
         <LayoutsInquirys />
         <LayoutsVideoNews />
-        <LayoutsGalleryNews />
       </div>
 
       <LayoutsSidebar />
@@ -91,7 +90,9 @@ const isMenuOpen = ref(false)
 const searchTerm = ref('')
 const email = ref('')
 const featuredArticles = computed(() => {
-  return sortedNews.value.slice(0, 2) // 1-chi va 2-chi maqolalar (asosiydan tashqari)
+  return sortedNews.value
+    .filter(article => article.image) // faqat link mavjud bo‘lsa
+    .slice(0, 2) // 2 ta maqola
 })
 
 

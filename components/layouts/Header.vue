@@ -76,7 +76,7 @@
           <a
             v-for="item in categoiresData"
             :key="item.text"
-            :href="item.text"
+            :href="`/category/${item.id}`"
             :class="[
               'text-sm font-medium transition-all duration-300 whitespace-nowrap px-3 py-2 rounded-full',
               item.active

@@ -14,7 +14,7 @@ import {
   Legend,
 } from "chart.js";
 
-const { newsData, isLoading, error, fetchNews } = useNews();
+const { newsData, allNews, fetchNewsById, fetchAllNews } = useNews();
 const { subscribeData, fetchSubscribes } = useSubscribe();
 const {
   visits,
@@ -80,7 +80,7 @@ const doughnutChartData = ref({
 });
 
 onMounted(async () => {
-  fetchNews();
+  fetchAllNews();
   fetchSubscribes();
   await fetchvisits(); // KUTING — ma'lumotlar yuklanishini
   await nextTick(); // DOM tayyor bo‘lishini kuting
@@ -156,7 +156,7 @@ onMounted(async () => {
           {
             title: 'Yangiliklar',
             link: '/news',
-            value: newsData?.length,
+            value: allNews?.length,
             icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
             color: 'teal',
           },

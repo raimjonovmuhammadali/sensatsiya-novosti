@@ -1,59 +1,29 @@
-// import { ref } from 'vue';
-// import { useApi } from './useApi';
+import { ref } from 'vue'
+import { BASE_URL } from './useApi'
 
-// export function useMedias() {
-//   const { fetch } = useApi();
-//   const error = ref(null);
+export const usesocials = () => {
+  const socialsData = useState('socials', () => null)
+  const error = useState('socialsError', () => null)
+  const loading = useState('socialsLoading', () => false)
 
-//   const getAllMedias = async () => {
-//     const { data, error: fetchError } = await fetch('medias/');
-//     if (fetchError) {
-//       error.value = 'Ijtimoiy tarmoqlarni yuklashda xatolik yuz berdi';
-//       return [];
-//     }
-//     return data || [];
-//   };
+  const fetchsocials = async () => {
 
-//   const addMedia = async (mediaData) => {
-//     const { error: postError } = await fetch('medias/', {
-//       method: 'POST',
-//       body: JSON.stringify(mediaData),
-//     });
-//     if (postError) {
-//       error.value = 'Ijtimoiy tarmoq qo‘shishda xatolik yuz berdi';
-//       return false;
-//     }
-//     return true;
-//   };
+    loading.value = true
+    try {
+      const res = await fetch(`${BASE_URL}medias/`)
 
-//   const updateMedia = async (id, mediaData) => {
-//     const { error: putError } = await fetch(`medias/${id}/`, {
-//       method: 'PUT',
-//       body: JSON.stringify(mediaData),
-//     });
-//     if (putError) {
-//       error.value = 'Ijtimoiy tarmoqni tahrirlashda xatolik yuz berdi';
-//       return false;
-//     }
-//     return true;
-//   };
+      if (!res.ok) {
+        throw new Error('Ma’lumot yuklanmadi')
+      }
 
-//   const deleteMedia = async (id) => {
-//     const { error: deleteError } = await fetch(`medias/${id}/`, {
-//       method: 'DELETE',
-//     });
-//     if (deleteError) {
-//       error.value = 'Ijtimoiy tarmoqni o‘chirishda xatolik yuz berdi';
-//       return false;
-//     }
-//     return true;
-//   };
+      const data = await res.json()
+      socialsData.value = data
+    } catch (err) {
+      error.value = err.message || 'Xatolik yuz berdi'
+    } finally {
+      loading.value = false
+    }
+  }
 
-//   return {
-//     error,
-//     getAllMedias,
-//     addMedia,
-//     updateMedia,
-//     deleteMedia,
-//   };
-// }
+  return { socialsData, error, loading, fetchsocials }
+}

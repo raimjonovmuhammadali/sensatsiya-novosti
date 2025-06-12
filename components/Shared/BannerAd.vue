@@ -1,11 +1,25 @@
 <template>
   <!-- Ad Banner -->
-  <div class="mb-10">
+  <div class="mb-10 h-[160px]" v-if="bannerAd">
     <div
-      class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl p-10 text-center"
+      class="bg-gray-100 h-[160px] border-gray-300 rounded-xl text-center"
     >
-      <p class="text-gray-600 font-semibold">Advertisement</p>
-      <p class="text-sm text-gray-400 mt-2">728 x 90 Banner Space</p>
+      <a :href="bannerAd.link" target="_blank" class="w-full h-full">
+        <img
+          v-if="bannerAd.image"
+          :src="bannerAd.image"
+          :alt="bannerAd.name"
+          class="w-full h-full rounded-xl object-cover"
+        />
+      </a>
     </div>
   </div>
 </template>
+<script setup>
+const { fetchadd, addData } = useadd();
+await fetchadd();
+
+const bannerAd = computed(() =>
+  addData.value.find((ad) => ad.advertisement_type === "banner" && ad.active)
+);
+</script>

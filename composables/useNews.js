@@ -41,5 +41,41 @@ export const useNews = () => {
     }
   }
 
-  return { newsData, allNews, error, loading, fetchNewsById, fetchAllNews }
+  // Yangilikni o‘chirish
+  const deleteNews = async (id) => {
+    loading.value = true
+    error.value = null
+    try {
+      const res = await fetch(`${BASE_URL}news/${id}/`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      if (!res.ok) throw new Error('Yangilik o‘chirilmadi')
+    } catch (err) {
+      error.value = err.message || 'O‘chirishda xatolik yuz berdi'
+    } finally {
+      loading.value = false
+    }
+  }
+
+  // Yangilikni yangilash
+  const updateNews = async (id, data) => {
+    loading.value = true
+    error.value = null
+    try {
+      const res = await fetch(`${BASE_URL}news/${id}/`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Yangilik yangilanmadi')
+      newsData.value = await res.json()
+    } catch (err) {
+      error.value = err.message || 'Yangilashda xatolik yuz berdi'
+    } finally {
+      loading.value = false
+    }
+  }
+
+  return { newsData, allNews, error, loading, fetchNewsById, fetchAllNews, deleteNews, updateNews }
 }
