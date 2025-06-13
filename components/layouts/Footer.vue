@@ -72,7 +72,7 @@
         <p>
           © 2025 Сенсация Новости. Barcha huquqlar himoyalangan! <br>
         </p>
-        <a href="https://t.me/rayimjonovblogs" target="_blank" class="flex items-center gap-2">Разработка - <img src="/img/rm logo png.png" alt="mrx logo" class="w-[25px] rounded-full"></a>
+        <a href="https://t.me/rayimjonovblogs" target="_blank" class="flex items-center gap-2">Разработчик - <img src="/img/rm logo png.png" alt="mrx logo" class="w-[25px] rounded-full"></a>
       </div>
     </div>
   </footer>

@@ -3,18 +3,18 @@
     <div class="grid lg:grid-cols-4 gap-10">
       <div class="lg:col-span-3">
         <!-- Hero Section -->
-        <section class="mb-10" v-if="allNews?.length && allNews[0].image">
+        <section class="mb-10" v-if="allNews?.length && allNews[6].image">
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Main Featured Article -->
             <div class="md:col-span-1">
               <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div class="relative">
                   <img
-                    :src="allNews[0].image"
-                    :alt="allNews[0].title"
+                    :src="allNews[6].image"
+                    :alt="allNews[6].title"
                     class="w-full h-78 object-cover"
                   />
-                  <span v-if="allNews[0].isBreaking" class="absolute top-4 left-4 bg-red-700 text-white px-3 py-1 rounded-md text-xs font-bold">
+                  <span v-if="allNews[6].isBreaking" class="absolute top-4 left-4 bg-red-700 text-white px-3 py-1 rounded-md text-xs font-bold">
                     <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
@@ -22,11 +22,11 @@
                   </span>
                   <div class="absolute bottom-4 left-4 right-4">
                     <span class="bg-blue-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-2 inline-block">
-                      {{ getCategoryTitle(allNews[0].category) }}
+                      {{ getCategoryTitle(allNews[6].category) }}
                     </span>
-                    <nuxt-link :to="`/detail/${allNews[0].id}`">
+                    <nuxt-link :to="`/detail/${allNews[6].id}`">
                       <h2 class="text-white text-2xl font-bold leading-tight bg-black/60 p-3 rounded-lg">
-                      {{ allNews[0].title }}
+                      {{ allNews[6].title }}
                     </h2>
                     </nuxt-link>
                   </div>
