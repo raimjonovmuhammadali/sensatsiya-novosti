@@ -75,7 +75,7 @@ const updateActive = async (item) => {
     active: !newActive,
   };
 
-  const { error, data } = await useFetch(`https://news111.pythonanywhere.com/advertisements/${item.id}/`, {
+  const { error, data } = await useFetch(`${BASE_URL}advertisements/${item.id}/`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ const saveChanges = async () => {
   } = editedItem.value;
 
   const { error } = await useFetch(
-    `https://news111.pythonanywhere.com/advertisements/${id}/`,
+    `${BASE_URL}advertisements/${id}/`,
     {
       method: "PUT",
       headers: {
@@ -169,7 +169,7 @@ const createNewAd = async () => {
   }
 
   const { error } = await useFetch(
-    `https://news111.pythonanywhere.com/advertisements/`,
+    `${BASE_URL}advertisements/`,
     {
       method: "POST",
       headers: {
@@ -191,7 +191,7 @@ const createNewAd = async () => {
 const deleteAd = async (id) => {
   if (confirm("Haqiqatan ham o‘chirmoqchimisiz?")) {
     const { error } = await useFetch(
-      `https://news111.pythonanywhere.com/advertisements/${id}/`,
+      `${BASE_URL}advertisements/${id}/`,
       {
         method: "DELETE",
         headers: {

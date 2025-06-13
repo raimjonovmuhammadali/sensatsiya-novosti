@@ -88,7 +88,7 @@ const handleCreate = async () => {
     formData.append('link', createForm.value.link || '');
     formData.append('category', createForm.value.category);
 
-    const response = await fetch('https://news111.pythonanywhere.com/news/', {
+    const response = await fetch(`${BASE_URL}news/`, {
       method: 'POST',
       body: formData,
     });
