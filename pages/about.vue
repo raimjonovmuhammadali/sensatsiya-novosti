@@ -36,8 +36,8 @@
             </div>
             <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-6">
               <h2 class="text-xl font-bold mb-4">Murojaat va takliflar uchun:</h2>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                <a href="https://t.me/sensatsiya_novosti_bot">Telegram botimiz</a><br>
+              <p class="text-gray-600 text-sm leading-relaxed flex flex-col gap-1">
+                <a href="https://t.me/sensatsiya_novosti_bot" class="p-2 bg-gray-200 rounded-full w-[150px] text-center">Telegram botimiz</a><br>
                 <a href="tel:+998339660606">☎️ +998 33 966 06 06</a>
               </p>
             </div>

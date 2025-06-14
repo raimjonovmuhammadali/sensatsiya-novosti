@@ -1,12 +1,11 @@
 <template>
-  <header
-    class="bg-white shadow-lg border-b-2 border-blue-600 sticky top-0 z-50 transition-all duration-300"
-  >
+  <header class="bg-white shadow-lg border-b-2 border-blue-600 sticky top-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center">
-          <nuxt-link to="/"
+          <nuxt-link
+            to="/"
             class="text-3xl font-extrabold text-blue-600 tracking-tight transition-transform duration-300 hover:scale-105"
           >
             Сенсация Новости
@@ -14,13 +13,12 @@
         </div>
 
         <!-- Search Bar -->
-        <div
-          class="hidden md:flex items-center flex-1 max-w-md mx-4 lg:mx-8 relative group"
-        >
+        <div class="hidden md:flex items-center flex-1 max-w-md mx-4 lg:mx-8 relative group">
           <input
             v-model="searchTerm"
             type="text"
             placeholder="Izlash"
+            @keyup.enter="goToSearch"
             class="pl-10 pr-4 py-2.5 w-full border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all duration-300 group-hover:shadow-md"
             aria-label="Search news articles"
             @focus="searchFocused = true"
@@ -40,6 +38,19 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             ></path>
           </svg>
+
+          <!-- Search Results Dropdown -->
+          <div v-if="searchTerm && filteredNews.length" class="absolute top-full left-0 right-0 bg-white rounded shadow mt-2 z-50">
+            <ul>
+              <li
+                v-for="item in filteredNews"
+                :key="item.id"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <NuxtLink :to="`/detail/${item.id}`">{{ item.title }}</NuxtLink>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <!-- Right Side -->
@@ -145,22 +156,39 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue'
 
 const { categoiresData, fetchCategoires } = useCategoires()
+const { newsData, allNews, fetchNewsById, fetchAllNews } = useNews()
+const router = useRouter()
+
+const isMenuOpen = ref(false)
+const searchTerm = ref('')
+const searchFocused = ref(false)
 
 onMounted(() => {
   fetchCategoires()
+  fetchAllNews()
 })
 
-const isMenuOpen = ref(false);
-const searchTerm = ref('');
-const searchFocused = ref(false);
-
-// Toggle mobile menu
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+  isMenuOpen.value = !isMenuOpen.value
+}
+
+// Title bo‘yicha filtrlash
+const filteredNews = computed(() => {
+  if (!allNews.value || !searchTerm.value.trim()) return []
+  return allNews.value.filter(news =>
+    news.title.toLowerCase().includes(searchTerm.value.toLowerCase())
+  )
+})
+
+const goToSearch = () => {
+  if (searchTerm.value.trim()) {
+    router.push(`/search?q=${encodeURIComponent(searchTerm.value.trim())}`)
+    searchTerm.value = ''
+  }
+}
 </script>
 
 <style scoped>

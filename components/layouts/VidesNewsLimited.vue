@@ -138,7 +138,7 @@ const { newsData, allNews, fetchAllNews } = useNews()
 await fetchAllNews()
 
 const filteredVideos = computed(() => {
-  return allNews.value?.filter(video => video && video.link)
+  return allNews.value?.filter(video => video && video.link).slice(0,6)
 })
 
 const openModal = (video) => {

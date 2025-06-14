@@ -67,7 +67,7 @@
 
         <SharedBannerAd />
         <LayoutsInquirys />
-        <LayoutsVideoNews />
+        <LayoutsVidesNewsLimited />
       </div>
 
       <LayoutsSidebar />
@@ -79,6 +79,7 @@
 
 
 <script setup>
+import { LayoutsVidesNewsLimited } from '#components';
 import { ref, onMounted } from 'vue'
 
 
