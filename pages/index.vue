@@ -1,123 +1,86 @@
 <template>
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <div class="grid lg:grid-cols-4 gap-10">
-      <div class="lg:col-span-3">
-        <!-- Hero Section -->
-        <section class="mb-10" v-if="allNews?.length && allNews[6].image">
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Main Featured Article -->
-            <div class="md:col-span-1">
-              <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <div class="relative">
-                  <img
-                    :src="allNews[6].image"
-                    :alt="allNews[6].title"
-                    class="w-full h-78 object-cover"
-                  />
-                  <span v-if="allNews[6].isBreaking" class="absolute top-4 left-4 bg-red-700 text-white px-3 py-1 rounded-md text-xs font-bold">
-                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    BREAKING
-                  </span>
-                  <div class="absolute bottom-4 left-4 right-4">
-                    <span class="bg-blue-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-2 inline-block">
-                      {{ getCategoryTitle(allNews[6].category) }}
-                    </span>
-                    <nuxt-link :to="`/detail/${allNews[6].id}`">
-                      <h2 class="text-white text-2xl font-bold leading-tight bg-black/60 p-3 rounded-lg">
-                      {{ allNews[6].title }}
-                    </h2>
-                    </nuxt-link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Secondary Articles -->
-            <div class="space-y-6">
-              <div
-                v-for="article in featuredArticles"
-                :key="article.id"
-                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-              >
-                <div class="flex">
-                  <img
-                    :src="article.image"
-                    :alt="article.title"
-                    class="w-36 h-36 object-cover"
-                  />
-                  <div class="flex-1 p-5">
-                    <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded-md text-xs font-medium mb-2 inline-block">
-                      {{ getCategoryTitle(article.category) }}
-                    </span>
-                    <nuxt-link :to="`/detail/${article.id}`" class="font-semibold text-base leading-tight mb-2 line-clamp-2">{{ article.title }}</nuxt-link>
-                    <div class="flex items-center text-xs text-gray-600">
-                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {{ new Date(article.created_date).toLocaleString() }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <SharedBannerAd />
-        <LayoutsInquirys />
-        <LayoutsVidesNewsLimited />
-      </div>
-
-      <LayoutsSidebar />
+  <div>
+    <!-- Loader: Ma'lumotlar yuklanmoqda -->
+    <div v-if="isLoading" class="flex items-center justify-center min-h-[60vh]">
+      <svg
+        class="animate-spin h-10 w-10 text-blue-600"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        />
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8z"
+        />
+      </svg>
     </div>
-  </main>
 
-  <LayoutsFooter />
+    <!-- Asosiy sahifa mazmuni -->
+    <main v-else class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid lg:grid-cols-4 gap-10">
+        <div class="lg:col-span-3">
+          <LayoutsHero />
+          <SharedBannerAd />
+          <LayoutsInquirys />
+          <LayoutsVidesNewsLimited />
+        </div>
+        <LayoutsSidebar />
+      </div>
+    </main>
+
+    <LayoutsFooter />
+  </div>
 </template>
 
-
 <script setup>
-import { LayoutsVidesNewsLimited } from '#components';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
-
-
-const { newsData, allNews, fetchNewsById, fetchAllNews } = useNews();
+const { newsData, allNews, fetchNewsById, fetchAllNews } = useNews()
 const { fetchCategoires, categoiresData } = useCategoires()
 
+const isLoading = ref(true)
 const isMenuOpen = ref(false)
 const searchTerm = ref('')
 const email = ref('')
-const featuredArticles = computed(() => {
-  return sortedNews.value
-    .filter(article => article.image) // faqat link mavjud bo‘lsa
-    .slice(0, 2) // 2 ta maqola
-})
-
-
-const getCategoryTitle = (categoryId) => {
-  return categoiresData.value?.find(cat => cat.id === categoryId)?.title || 'Nomaʼlum'
-}
 
 const sortedNews = computed(() => {
   if (!allNews.value) return []
-  return [...allNews.value].sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
+  return [...allNews.value].sort(
+    (a, b) => new Date(b.created_date) - new Date(a.created_date)
+  )
 })
 
+const featuredArticles = computed(() => {
+  return sortedNews.value
+    .filter(article => article.image)
+    .slice(0, 2)
+})
 
-
+const getCategoryTitle = (categoryId) => {
+  return (
+    categoiresData.value?.find((cat) => cat.id === categoryId)?.title ||
+    'Nomaʼlum'
+  )
+}
 
 onMounted(async () => {
-  await fetchAllNews()
-  await fetchCategoires()
+  try {
+    await fetchAllNews()
+    await fetchCategoires()
 
-  const today = new Date().toISOString().split('T')[0]
-  if (localStorage.getItem('visited_today') !== today) {
-    localStorage.setItem('visited_today', today)
+    const today = new Date().toISOString().split('T')[0]
+    if (localStorage.getItem('visited_today') !== today) {
+      localStorage.setItem('visited_today', today)
 
-    try {
       await fetch(`${BASE_URL}visits/`, {
         method: 'POST',
         headers: {
@@ -125,9 +88,11 @@ onMounted(async () => {
         },
         body: JSON.stringify({ count: 1 })
       })
-    } catch (error) {
-      console.error('Visit tracking failed:', error)
     }
+  } catch (error) {
+    console.error('Maʼlumotlarni yuklashda xatolik:', error)
+  } finally {
+    isLoading.value = false
   }
 })
 </script>
