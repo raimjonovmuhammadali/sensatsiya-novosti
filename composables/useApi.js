@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://45.144.221.41/';
+export const BASE_URL = 'https://api.sensatsiya-novosti.uz/';
